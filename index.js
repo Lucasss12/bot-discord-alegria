@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, SlashCommandBuilder, REST, Routes } = require('discord.js');
+const express = require('express');
 
 // Création du client Discord
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -47,3 +48,8 @@ client.on('interactionCreate', async interaction => {
 
 client.login(process.env.DISCORD_TOKEN);
  
+// Express server pour keep-alive
+const app = express();
+app.get('/', (_, res) => res.send('Bot is running'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Keep-alive actif sur ${PORT}`));
