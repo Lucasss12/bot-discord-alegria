@@ -2,5 +2,10 @@
   {
     "name": "google-make",
     "response": "Bonjour @user 👋,\n\nJe te partage avec plaisir ce tutoriel de Jeff. Il est à jour et vraiment très clair. Prends le temps de le suivre à ton rythme, et surtout, sache que si tu rencontres la moindre difficulté ou si tu as des interrogations, je suis disponible pour t'aider. N'hésite surtout pas ! 👍 \nhttps://www.youtube.com/watch?v=esr3h3PHaQk"
+  },
+  {
+    "name": "test-image",
+    "response": "Je test l'upload d'image",
+    "image": "http://localhost:3000/images/salon-vocal.jpg"
   }
 ]

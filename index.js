@@ -1,12 +1,10 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, SlashCommandBuilder, REST, Routes } = require('discord.js');
 const express = require('express');
-const commandsData = require('./commands.json'); // Charger les commandes depuis le fichier JSON
+const commandsData = require('./responses.json'); 
 
-// Création du client Discord
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// Définition des commandes slash à partir du fichier JSON
 const commands = commandsData.map(command => 
   new SlashCommandBuilder()
     .setName(command.name)
@@ -30,10 +28,14 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
-  // Trouver la commande correspondante dans le fichier JSON
   const command = commandsData.find(cmd => cmd.name === interaction.commandName);
   if (command) {
-    await interaction.reply(command.response);
+    await interaction.reply({
+      embeds: [{
+        description: command.response,
+        ...(command.image ? { image: { url: command.image } } : {})
+      }]
+    });;
   } else {
     await interaction.reply("Commande non reconnue.");
   }
@@ -42,6 +44,7 @@ client.on('interactionCreate', async interaction => {
 client.login(process.env.DISCORD_TOKEN);
 
 const app = express();
+app.use('/images', express.static('images'));
 app.get('/', (_, res) => res.send('Bot is running'));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Keep-alive actif sur ${PORT}`));
