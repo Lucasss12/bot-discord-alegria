@@ -31,17 +31,17 @@ client.on('interactionCreate', async interaction => {
   const command = commandsData.find(cmd => cmd.name === interaction.commandName);
   if (command) {
     await interaction.reply({
-      embeds: [{
-        description: command.response,
-        ...(command.image ? { image: { url: command.image } } : {})
-      }]
-    });;
+      content: command.response,
+      files: command.image ? [command.image] : [],
+    });
   } else {
     await interaction.reply("Commande non reconnue.");
   }
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+console.log('Bot connecté avec succès !');
 
 const app = express();
 app.use('/images', express.static('images'));
