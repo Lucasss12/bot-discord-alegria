@@ -6,6 +6,6 @@
   {
     "name": "test-image",
     "response": "Je test l'upload d'image",
-    "image": "http://localhost:3000/images/salon-vocal.jpg"
+    "image": "https://raw.githubusercontent.com/Lucasss12/bot-discord-alegria/main/images/salon-vocal.jpg"
   }
 ]
